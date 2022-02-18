@@ -1,3 +1,3 @@
-module github.com/go-telegram-bot-api/telegram-bot-api/v5
+module github.com/c-mueller/faas-tgbotapi
 
 go 1.16
