@@ -1,3 +1,3 @@
-module github.com/c-mueller/faas-tgbotapi
+module github.com/eisklumpen/faas-tgbotapi
 
 go 1.16
