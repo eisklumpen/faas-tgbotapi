@@ -34,5 +34,6 @@ func (bot *BotAPI) GetHandlerFuncForWebhook(onUpdate func(update *Update) error)
 			_, _ = res.Write(errMsg)
 			return
 		}
+		res.WriteHeader(200)
 	}
 }
