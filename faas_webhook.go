@@ -2,11 +2,19 @@ package tgbotapi
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
-func (bot *BotAPI) GetHandlerFuncForWebhook(onUpdate func(update *Update) error) http.HandlerFunc {
+func (bot *BotAPI) GetHandlerFuncForWebhook(botAccessToken string, onUpdate func(update *Update) error) http.HandlerFunc {
 	return func(res http.ResponseWriter, req *http.Request) {
+		queryBat := req.URL.Query().Get("token")
+		if queryBat != botAccessToken {
+			fmt.Println("Ignoring Call. Bot Access Token missing/invalid")
+			res.Write([]byte("Invalid bot access token"))
+			res.WriteHeader(http.StatusBadRequest)
+			return
+		}
 		defer func() {
 			if r := recover(); r != nil {
 				res.WriteHeader(http.StatusInternalServerError)
